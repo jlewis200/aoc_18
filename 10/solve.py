@@ -17,6 +17,7 @@ def solve(positions, velocities):
         board[*position] = "#"
 
     print(board_str(board.T))
+    print(steps)
 
 
 def get_min_spread_steps(positions, velocities):
