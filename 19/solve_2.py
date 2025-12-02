@@ -6,7 +6,6 @@ be rewritten in a more efficient manner.  See 'program_re.odg' for control
 flow graph and details.
 """
 
-constant = 1028
 constant = 10551428
 total = 0
 
