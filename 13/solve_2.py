@@ -151,9 +151,6 @@ def collision(carts):
             if tuple(cart.position) in collision_positions:
                 cart.crashed = True
 
-                # if (cart.position == np.array([2, 2])).all():
-                #    breakpoint()
-
 
 def parse(data):
     """ """
