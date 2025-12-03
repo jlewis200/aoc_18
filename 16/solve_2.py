@@ -139,7 +139,6 @@ def solve(samples, program):
             interpreter.opcode_map[opcode](sample.instruction)
 
             if interpreter.registers != sample.after:
-                # possibilities[opcode].discard(sample.instruction.opcode)
                 possibilities[sample.instruction.opcode].discard(opcode)
 
     interpreter = Interpreter()
