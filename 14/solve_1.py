@@ -1,14 +1,7 @@
 #!/usr/bin/env python3
 
-import re
-from dataclasses import dataclass
-from collections import defaultdict
-import pandas as pd
-from itertools import pairwise
-
 
 def solve(n_recipies):
-    """ """
     elf_0_idx = 0
     elf_1_idx = 1
     recipies = [3, 7]
