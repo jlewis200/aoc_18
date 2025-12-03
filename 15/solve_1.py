@@ -6,7 +6,7 @@ from time import sleep
 import numpy as np
 import networkx as nx
 
-ANIMATION_DELAY = 0.1
+ANIMATION_DELAY = 0.0
 
 
 @dataclass
@@ -70,31 +70,10 @@ class Unit:
 
         return grid
 
-    def get_targets(self, units, graph, grid):
-        targets = []
-
-        for unit in units:
-            if self.variety == unit.variety or unit.variety == "#":
-                continue
-
-            y, x = unit.position
-
-            for other in [
-                (y + 1, x),
-                (y - 1, x),
-                (y, x + 1),
-                (y, x - 1),
-            ]:
-
-                if grid[other] == ".":
-                    targets.append(other)
-
-        return targets
-
     def get_path(self, target, graph):
         try:
             paths = list(nx.all_shortest_paths(graph, self.position, target))
-        except:
+        except nx.exception.NodeNotFound:
             return []
 
         if len(paths) == 0:
@@ -117,7 +96,6 @@ class Unit:
         graph = self.build_graph(units)
 
         grid[self.position] = "."
-        candidates = []
 
         target = "E" if self.variety == "G" else "G"
         queue = deque([self.position])
@@ -150,8 +128,6 @@ class Unit:
         if self.variety not in ("E", "G"):
             return
 
-        grid = self.build_grid(units)
-
         targets = []
         y, x = self.position
         adjacencies = [
@@ -164,7 +140,7 @@ class Unit:
         min_hp = 2**32
 
         for unit in units:
-            if self.variety == unit.variety or unit.variety == "#":
+            if unit.variety in (self.variety, "#"):
                 continue
 
             if unit.position in adjacencies:
@@ -185,7 +161,6 @@ class Unit:
 
 
 def solve(data):
-    """ """
     grid = np.array(data)
     units = get_units(grid)
     iteration = 0
@@ -282,7 +257,6 @@ def get_units(grid):
 
 
 def parse(data):
-    """ """
     return [list(line.strip()) for line in data]
 
 
