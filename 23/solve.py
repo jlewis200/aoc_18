@@ -8,7 +8,7 @@ from aoc_data_structures import VectorTuple
 def solve(parsed):
     nanobots = [VectorTuple(*args[:-1]) for args in parsed]
     radii = [args[-1] for args in parsed]
-    max_radius_nanobot, max_radius = get_maxs(nanobots, radii)
+    max_radius_nanobot, max_radius = get_maxes(nanobots, radii)
     in_range = 0
 
     for nanobot in nanobots:
@@ -22,7 +22,7 @@ def manhattan(vt_0, vt_1):
     return sum(abs(vt_0 - vt_1))
 
 
-def get_maxs(nanobots, radii):
+def get_maxes(nanobots, radii):
     idx = np.argmax(radii)
     max_radius = radii[idx]
     max_radius_nanobot = nanobots[idx]
